@@ -59,17 +59,16 @@ public class BeanFactory {
      * @return
      */
     private Constructor<?> findConstructor(Class<?> clazz) {
-        /**
-         * Reflection에서 제공해주는 ReflectionsUtils의 getAllConstructors() <br/>
-         * 넘겨받은 클래스 타입 객체의 모든 생성자를 가져온다. <br/>
-         * 딘, Inject 어노테이션이 붙은 생성자만 가져온다.
-         */
-        Set<Constructor> injectedConstructors = ReflectionUtils.getAllConstructors(clazz, ReflectionUtils.withAnnotation(Inject.class));
-        if (injectedConstructors.isEmpty()) {
-            return null;
+
+        Constructor<?> constructor = BeanFactoryUtils.getInjectedConstructor(clazz); // 생성자 반환
+
+        if (Objects.nonNull(constructor)) { //counstructor가 존재하면 return
+            return constructor;
         }
-        return injectedConstructors.iterator().next(); // 첫번째 요소(생성자)만 리턴한다.
+        return clazz.getConstructors()[0]; // counstructor가 존재하지 않으면 클래스타입 객체로부터 첫번째 생성자 return
     }
+
+
 
     /**
      * 인자로 넘어온 클래스타입 객체를 key값으로 Map타입 멤버변수 beans로부터 Object를 반환받는다.
