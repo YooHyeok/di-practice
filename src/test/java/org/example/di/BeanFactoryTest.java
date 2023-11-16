@@ -2,7 +2,9 @@ package org.example.di;
 
 import org.example.annotation.Controller;
 import org.example.annotation.Service;
+import org.example.controller.UserController;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;
@@ -49,4 +51,8 @@ class BeanFactoryTest {
         return beans;
     }
 
+    @Test
+    void diTest() {
+        UserController userController = beanFactory.getBean(UserController.class);// BeanFactory로부터 UserController에 대한 Bean을 반환받는다.
+    }
 }
