@@ -68,7 +68,20 @@ public class BeanFactory {
         return clazz.getConstructors()[0]; // counstructor가 존재하지 않으면 클래스타입 객체로부터 첫번째 생성자 return
     }
 
-
+    /**
+     * 파라미터(필드) 정보를 가져올 때 호출한다. <br/>
+     * 전달받은 클래스타입 객체로부터 instance 빈을 받아온 뒤  <br/>
+     * bean이 존재한다면 해당 빈을 반환, 존재하지않는다면 타입 클래스에 대한 인스턴스를 재생성해서 반환한다.
+     * @param typeClass
+     * @return
+     */
+    private Object getParameterByClass(Class<?> typeClass) {
+        Object instanceBean = getBean(typeClass);
+        if (Objects.nonNull(instanceBean)) {
+            return instanceBean;
+        }
+        return createInstance(typeClass); // 타입클래스 재 반환
+    }
 
     /**
      * 인자로 넘어온 클래스타입 객체를 key값으로 Map타입 멤버변수 beans로부터 Object를 반환받는다.
