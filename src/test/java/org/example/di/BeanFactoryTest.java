@@ -31,6 +31,7 @@ class BeanFactoryTest {
          * @return: UserController, UserService
          */
         Set<Class<?>>  preInstantiatedClazz = getTypesAnnotatedWith(Controller.class, Service.class);
+        beanFactory = new BeanFactory(preInstantiatedClazz);
     }
 
     /**
