@@ -10,6 +10,12 @@ repositories {
 }
 
 dependencies {
+
+    /* Reflection 의존성 주입 */
+    implementation 'org.reflections:reflections:0.10.2'
+    /* 테스트코드 가독성을 위한 assertJ 의존성 주입 */
+    testImplementation 'org.assertj:assertj-core:3.22.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
