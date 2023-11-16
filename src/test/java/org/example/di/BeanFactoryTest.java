@@ -11,6 +11,7 @@ import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BeanFactoryTest {
@@ -54,5 +55,7 @@ class BeanFactoryTest {
     @Test
     void diTest() {
         UserController userController = beanFactory.getBean(UserController.class);// BeanFactory로부터 UserController에 대한 Bean을 반환받는다.
+        assertThat(userController).isNotNull();
+        assertThat(userController.getUserService()).isNotNull();
     }
 }
